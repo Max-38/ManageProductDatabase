@@ -1,0 +1,109 @@
+﻿<Window x:Class="ManageProductDatabase.App.Views.UpdateProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageProductDatabase.App.Views"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=MainWindowVM}"
+        mc:Ignorable="d"
+        Title="UpdateProductWindow" Height="375" Width="500"
+        Name="UpdateWindow"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Text="Введите данные"
+            FontSize="24"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
+
+        <StackPanel
+            Name="DataPanel"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="400">
+
+            <StackPanel.BindingGroup>
+                <BindingGroup NotifyOnValidationError="True">
+                    <BindingGroup.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </BindingGroup.ValidationRules>
+                </BindingGroup>
+            </StackPanel.BindingGroup>
+
+            <TextBlock Text="Название товара"
+                       HorizontalAlignment="Center"
+                       FontSize="20"/>
+            <TextBox FontSize="20">
+                <TextBox.Text>
+                    <Binding Path="Name">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="Цена"
+                       HorizontalAlignment="Center"
+                       FontSize="20"/>
+            <TextBox FontSize="20">
+                <TextBox.Text>
+                    <Binding Path="Price">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="Количество"
+                       HorizontalAlignment="Center"
+                       FontSize="20"/>
+            <TextBox FontSize="20">
+                <TextBox.Text>
+                    <Binding Path="ItemsCount">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+        </StackPanel>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Height="30"
+            Width="100"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Content="Сохранить"
+            Command="{Binding Update}"
+            CommandParameter="{Binding ElementName=DataPanel}"/>
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Height="30"
+            Width="100"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Content="Отмена"
+            Command="{Binding Close}"
+            CommandParameter="{Binding ElementName=UpdateWindow}"/>
+    </Grid>
+</Window>
